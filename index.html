@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="security-indicator">
-          <div id="security-indicator-bar" class="bar" style="width: 90%"></div>
+          <div id="security-indicator-bar" class="bar"></div>
         </div>
       </section>
 
@@ -60,19 +60,19 @@
           </div>
           <div class="config">
             <label class="checkbox-container">
-                <span class="text">Maiúsculas</span>
-                <input type="checkbox" id="uppercase-check" checked>
-                <span class="checkmark"></span>
+              <span class="text">Maiúsculas</span>
+              <input type="checkbox" id="uppercase-check" checked />
+              <span class="checkmark"></span>
             </label>
             <label class="checkbox-container">
-                <span class="text">Números</span>
-                <input type="checkbox" id="number-check" checked>
-                <span class="checkmark"></span>
+              <span class="text">Números</span>
+              <input type="checkbox" id="number-check" checked />
+              <span class="checkmark"></span>
             </label>
             <label class="checkbox-container">
-                <span class="text">Símbolos</span>
-                <input type="checkbox" id="symbol-check" checked>
-                <span class="checkmark"></span>
+              <span class="text">Símbolos</span>
+              <input type="checkbox" id="symbol-check" checked />
+              <span class="checkmark"></span>
             </label>
           </div>
         </div>
@@ -81,72 +81,7 @@
       <div class="submit">
         <button id="copiar">Copiar Senha</button>
       </div>
-
-
     </main>
-
-    <script>
-      const inputEl = document.querySelector("#senha");
-      const upperCaseCheckEl = document.querySelector("#uppercase-check")
-      const numberCheckEl = document.querySelector("#number-check")
-      const symbolCheckEl = document.querySelector("#symbol-check")
-
-      const tamanhoSenha = document.querySelector("#tamanho-senha");
-      tamanhoSenha.addEventListener("input", function () {
-        senhaAleatoria = tamanhoSenha.value;
-
-        document.querySelector('#password-length-text').innerText =
-        senhaAleatoria
-
-        generatePassword();
-      });
-
-
-
-      let senhaAleatoria = 16;
-
-      function generatePassword() {
-        let chars = "abcdefghjkmnpqrstuvwxyz"
-
-        const upperCaseChars = "ABCDEFGHJKLMNPQRSTUVWXYZ"
-        const numberChars = "123456789"
-        const symbolChars = "?!@&*()[]"
-
-        if (upperCaseCheckEl.checked) {
-          chars += upperCaseChars
-        }
-
-        if (numberCheckEl.checked) {
-          chars += numberChars
-        }
-
-        if (symbolCheckEl.checked) {
-          chars += symbolChars
-        }
-        let password = "";
-
-        for (let i = 0; i < senhaAleatoria; i++) {
-          const randomNumber = Math.floor(Math.random() * chars.length);
-          password += chars.substring(randomNumber, randomNumber + 1);
-        }
-
-        inputEl.value = password;
-
-        console.log(password);
-      }
-
-      function copiar() {
-        navigator.clipboard.writeText(inputEl.value);
-      }
-
-      upperCaseCheckEl.addEventListener("click", generatePassword)
-      numberCheckEl.addEventListener("click", generatePassword)
-      symbolCheckEl.addEventListener("click", generatePassword)
-
-      document.querySelector("#copiar").addEventListener("click", copiar);
-      document.querySelector("#copy-1").addEventListener("click", copiar);
-
-      generatePassword();
-    </script>
   </body>
+  <script src="script.js"></script>
 </html>
