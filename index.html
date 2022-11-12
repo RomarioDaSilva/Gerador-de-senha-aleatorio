@@ -4,41 +4,86 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="reset.css" />
     <title>Document</title>
   </head>
   <body>
-    <h1>Gerador de Senha</h1>
-    <p>
-      Utilize o nosso gerador de senha online para criar uma senha forte e
-      segura.
-    </p>
+    <main>
+      <section class="hero">
+        <h1 class="title">Gerador de Senha</h1>
+        <p class="subtitle">
+          Utilize o nosso gerador de senha online para criar uma senha forte e
+          segura.
+        </p>
+      </section>
 
-    <input type="text" name="senha" id="senha" />
+      <section class="box">
+        <div class="password">
+          <div class="text">
+            <input type="text" name="senha" id="senha" />
+          </div>
+          <div class="actions">
+            <button id="copy-1">
+              <img src="copy.svg" width="42" />
+            </button>
+            <button id="renew">
+              <img src="renew.svg" width="42" />
+            </button>
+          </div>
+        </div>
+      </section>
 
-    <input
-      type="range"
-      name="tamanho-senha"
-      id="tamanho-senha"
-      value="16"
-      min="4"
-      max="64"
-    />
+      <input
+        type="range"
+        name="tamanho-senha"
+        id="tamanho-senha"
+        value="16"
+        min="4"
+        max="64"
+      />
 
-    <button>Copiar Senha</button>
+      <button id="copiar">Copiar Senha</button>
+    </main>
 
     <script>
+      const inputEl = document.querySelector("#senha");
+
+      const tamanhoSenha = document.querySelector("#tamanho-senha");
+      tamanhoSenha.addEventListener("input", function () {
+        senhaAleatoria = tamanhoSenha.value;
+        generatePassword();
+      });
+
+      document.querySelector("#copiar").addEventListener("click", copiar);
+      document.querySelector("#copy-1").addEventListener("click", copiar);
+
+      let senhaAleatoria = 16;
+
       function generatePassword() {
         const chars =
           "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789?!@&*()[]";
 
         let password = "";
 
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < senhaAleatoria; i++) {
           const randomNumber = Math.floor(Math.random() * chars.length);
           password += chars.substring(randomNumber, randomNumber + 1);
         }
 
+        inputEl.value = password;
+
         console.log(password);
+      }
+
+      function copiar() {
+        navigator.clipboard.writeText(inputEl.value);
       }
 
       generatePassword();
